@@ -17,24 +17,26 @@ public class Menu {
             opcion = scanner.nextInt();
             scanner.nextLine();
 
-            Juego juego = new Juego();
             switch (opcion) {
                 case 1:
-                    juego.jugar();
+                    Juego juego1 = new Juego();
+                    juego1.jugar();
                     break;
                 case 2:
-                    juego.ingresarPersonajesManualmente();
-                    juego.jugar();
+                    Juego juego2 = new Juego();
+                    if (juego2.ingresarPersonajesManualmente()) {
+                        juego2.jugar();
+                    }
                     break;
                 case 3:
-                    //EstadoPersonajes.leerLogs();
+                    EstadoPersonajes.leerLogs();
                     break;
                 case 4:
-                    //EstadoPersonajes.borrarLogs();
+                    EstadoPersonajes.borrarLogs();
                     break;
                 case 5:
                     System.out.println("¡Gracias por jugar!");
-                    break;
+                    break; // Salir del método mostrarMenu()
                 default:
                     System.out.println("Opción no válida. Inténtelo de nuevo.");
             }

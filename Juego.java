@@ -125,6 +125,7 @@ public class Juego {
 
         int indexEquipo1 = 0;
         int indexEquipo2 = 0;
+        StringBuilder log = new StringBuilder();
 
         while (indexEquipo1 < equipo1.size() && indexEquipo2 < equipo2.size()) {
             Personaje atacante;
@@ -139,7 +140,7 @@ public class Juego {
             }
 
             Combate combate = new Combate(atacante, defensor);
-            combate.realizarAtaques();
+            log.append(combate.realizarAtaques());
 
             if (defensor.getSalud() == 0) {
                 if (turnoEquipo1) {
@@ -157,9 +158,31 @@ public class Juego {
 
         if (indexEquipo1 == equipo1.size()) {
             System.out.println("Equipo 2 ha ganado el juego.");
+            log.append("Equipo 2 ha ganado el juego.\n");
         } else if (indexEquipo2 == equipo2.size()) {
             System.out.println("Equipo 1 ha ganado el juego.");
+            log.append("Equipo 1 ha ganado el juego.\n");
         }
+
+        log.append(generarLog());
+        EstadoPersonajes.guardarLog(log.toString());
+    }
+
+    private String generarLog() {
+        StringBuilder log = new StringBuilder();
+        log.append("*** Estado Final del Juego ***\n");
+
+        log.append("JUGADOR 1\n");
+        for (Personaje personaje : equipo1) {
+            log.append(personaje.toStringFormatted(0, "Jugador 1")).append("\n");
+        }
+
+        log.append("JUGADOR 2\n");
+        for (Personaje personaje : equipo2) {
+            log.append(personaje.toStringFormatted(0, "Jugador 2")).append("\n");
+        }
+
+        return log.toString();
     }
 
     public void mostrarEstadoFinal() {
@@ -183,6 +206,4 @@ public class Juego {
         iniciarJuego();
         mostrarEstadoFinal();
     }
-
-
 }
