@@ -1,23 +1,34 @@
+package src;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Juego {
-    private List<Personaje> equipo1;
-    private List<Personaje> equipo2;
+    private List<Personaje> Jugador1;
+    private List<Personaje> Jugador2;
+    private Set<String> nombresUsados;
 
     public Juego() {
-        equipo1 = new ArrayList<>();
-        equipo2 = new ArrayList<>();
+        Jugador1 = new ArrayList<>();
+        Jugador2 = new ArrayList<>();
+        nombresUsados = new HashSet<>();
     }
 
     public void generarEquiposAleatorios() {
-        for (int i = 0; i < 3; i++) {
-            equipo1.add(EstadoPersonajes.crearPersonajeAleatorio());
-            equipo2.add(EstadoPersonajes.crearPersonajeAleatorio());
+        while (Jugador1.size() < 3) {
+            Personaje personaje = EstadoPersonajes.crearPersonajeAleatorio();
+            if (!nombresUsados.contains(personaje.getNombre())) {
+                Jugador1.add(personaje);
+                nombresUsados.add(personaje.getNombre());
+            }
+        }
+        while (Jugador2.size() < 3) {
+            Personaje personaje = EstadoPersonajes.crearPersonajeAleatorio();
+            if (!nombresUsados.contains(personaje.getNombre())) {
+                Jugador2.add(personaje);
+                nombresUsados.add(personaje.getNombre());
+            }
         }
     }
 
@@ -26,7 +37,14 @@ public class Juego {
         for (int i = 0; i < 6; i++) {
             System.out.println("Ingrese los detalles del " + (i + 1) + "° personaje:");
 
-            String nombre = ingresarTexto(scanner, "Nombre: ");
+            String nombre;
+            do {
+                nombre = ingresarTexto(scanner, "Nombre: ");
+                if (nombresUsados.contains(nombre)) {
+                    System.out.println("Error: El nombre del personaje ya está en uso. Ingrese un nombre diferente.");
+                }
+            } while (nombresUsados.contains(nombre));
+
             String apodo = ingresarTexto(scanner, "Apodo: ");
             String raza = ingresarRaza(scanner);
             LocalDate fechaNacimiento = ingresarFecha(scanner);
@@ -52,10 +70,12 @@ public class Juego {
                     throw new IllegalArgumentException("Raza no válida");
             }
 
+            nombresUsados.add(nombre);
+
             if (i < 3) {
-                equipo1.add(personaje);
+                Jugador1.add(personaje);
             } else {
-                equipo2.add(personaje);
+                Jugador2.add(personaje);
             }
         }
         return true;
@@ -76,7 +96,7 @@ public class Juego {
     private String ingresarRaza(Scanner scanner) {
         String raza;
         do {
-            System.out.print("Raza (Humano (H), Orco (O), Elfo (E)): ");
+            System.out.print("Raza: Humano (H), Orco (O), Elfo (E): ");
             raza = scanner.nextLine().trim().toUpperCase();
             if (!raza.equals("H") && !raza.equals("O") && !raza.equals("E")) {
                 System.out.println("Error: Raza no válida. Ingrese H, O o E.");
@@ -121,22 +141,22 @@ public class Juego {
         Random random = new Random();
         boolean turnoEquipo1 = random.nextBoolean();
 
-        System.out.println("--- Comienza el juego ---");
+        System.out.println("--- Comienza el juego --- \n ");
 
         int indexEquipo1 = 0;
         int indexEquipo2 = 0;
         StringBuilder log = new StringBuilder();
 
-        while (indexEquipo1 < equipo1.size() && indexEquipo2 < equipo2.size()) {
+        while (indexEquipo1 < Jugador1.size() && indexEquipo2 < Jugador2.size()) {
             Personaje atacante;
             Personaje defensor;
 
             if (turnoEquipo1) {
-                atacante = equipo1.get(indexEquipo1);
-                defensor = equipo2.get(indexEquipo2);
+                atacante = Jugador1.get(indexEquipo1);
+                defensor = Jugador2.get(indexEquipo2);
             } else {
-                atacante = equipo2.get(indexEquipo2);
-                defensor = equipo1.get(indexEquipo1);
+                atacante = Jugador2.get(indexEquipo2);
+                defensor = Jugador1.get(indexEquipo1);
             }
 
             Combate combate = new Combate(atacante, defensor);
@@ -156,12 +176,12 @@ public class Juego {
             EstadoPersonajes.pausar();
         }
 
-        if (indexEquipo1 == equipo1.size()) {
-            System.out.println("Equipo 2 ha ganado el juego.");
-            log.append("Equipo 2 ha ganado el juego.\n");
-        } else if (indexEquipo2 == equipo2.size()) {
-            System.out.println("Equipo 1 ha ganado el juego.");
-            log.append("Equipo 1 ha ganado el juego.\n");
+        if (indexEquipo1 == Jugador1.size()) {
+            System.out.println("Felicitaciones Jugador 2 , las fuerzas mágicas del universo luz te abrazan!\n");
+            log.append("Felicitaciones Jugador 2 , las fuerzas mágicas del universo luz te abrazan!\n.\n");
+        } else if (indexEquipo2 == Jugador2.size()) {
+            System.out.println("Felicitaciones Jugador 1 , las fuerzas mágicas del universo luz te abrazan!\n");
+            log.append("Felicitaciones Jugador 1 , las fuerzas mágicas del universo luz te abrazan!\n\n");
         }
 
         log.append(generarLog());
@@ -172,13 +192,13 @@ public class Juego {
         StringBuilder log = new StringBuilder();
         log.append("*** Estado Final del Juego ***\n");
 
-        log.append("JUGADOR 1\n");
-        for (Personaje personaje : equipo1) {
+        log.append("    JUGADOR 1\n     ");
+        for (Personaje personaje : Jugador1) {
             log.append(personaje.toStringFormatted(0, "Jugador 1")).append("\n");
         }
 
-        log.append("JUGADOR 2\n");
-        for (Personaje personaje : equipo2) {
+        log.append("    JUGADOR 2\n     ");
+        for (Personaje personaje : Jugador2) {
             log.append(personaje.toStringFormatted(0, "Jugador 2")).append("\n");
         }
 
@@ -186,21 +206,21 @@ public class Juego {
     }
 
     public void mostrarEstadoFinal() {
-        System.out.println("\n*** Estado Final del Juego ***");
+        System.out.println("\n*** Estado Final del Juego *** \n ");
 
-        System.out.println("JUGADOR 1");
-        for (Personaje personaje : equipo1) {
+        System.out.println("         JUGADOR 1   ");
+        for (Personaje personaje : Jugador1) {
             System.out.println(personaje.toStringFormatted(0, "Jugador 1"));
         }
 
-        System.out.println("JUGADOR 2");
-        for (Personaje personaje : equipo2) {
+        System.out.println("        JUGADOR 2   ");
+        for (Personaje personaje : Jugador2) {
             System.out.println(personaje.toStringFormatted(0, "Jugador 2"));
         }
     }
 
     public void jugar() {
-        if (equipo1.isEmpty() && equipo2.isEmpty()) {
+        if (Jugador1.isEmpty() && Jugador2.isEmpty()) {
             generarEquiposAleatorios();
         }
         iniciarJuego();

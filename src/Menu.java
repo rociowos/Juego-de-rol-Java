@@ -1,3 +1,5 @@
+package src;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -6,7 +8,7 @@ public class Menu {
         int opcion;
 
         do {
-            System.out.println("\n--- Menú del Juego ---");
+            System.out.println("\n--- Menú de Juego ---");
             System.out.println("1. Iniciar partida (personajes aleatorios)");
             System.out.println("2. Iniciar partida (ingresar personajes manualmente)");
             System.out.println("3. Leer desde el archivo logs de todas las partidas jugadas");
