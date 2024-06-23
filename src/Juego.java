@@ -141,7 +141,7 @@ public class Juego {
         Random random = new Random();
         boolean turnoEquipo1 = random.nextBoolean();
 
-        System.out.println("--- Comienza el juego --- \n ");
+        System.out.println("        --- Comienza el juego --- \n        ");
 
         int indexEquipo1 = 0;
         int indexEquipo2 = 0;
@@ -199,13 +199,14 @@ public class Juego {
     private String generarLog() {
         StringBuilder log = new StringBuilder();
         log.append("*** Estado Final del Juego ***\n");
+        System.out.println("\n------------------------------- \n ");
 
-        log.append("    JUGADOR 1\n     ");
+        log.append("                    JUGADOR 1\n     ");
         for (Personaje personaje : Jugador1) {
             log.append(personaje.toStringFormatted(0, "Jugador 1")).append("\n");
         }
 
-        log.append("    JUGADOR 2\n     ");
+        log.append("                    JUGADOR 2\n     ");
         for (Personaje personaje : Jugador2) {
             log.append(personaje.toStringFormatted(0, "Jugador 2")).append("\n");
         }
@@ -215,13 +216,14 @@ public class Juego {
 
     public void mostrarEstadoFinal() {
         System.out.println("\n*** Estado Final del Juego *** \n ");
+        System.out.println("\n------------------------------- \n ");
 
-        System.out.println("         JUGADOR 1   ");
+        System.out.println("           JUGADOR 1   ");
         for (Personaje personaje : Jugador1) {
             System.out.println(personaje.toStringFormatted(0, "Jugador 1"));
         }
 
-        System.out.println("        JUGADOR 2   ");
+        System.out.println("\n           JUGADOR 2   ");
         for (Personaje personaje : Jugador2) {
             System.out.println(personaje.toStringFormatted(0, "Jugador 2"));
         }

@@ -26,12 +26,12 @@ public class EstadoPersonajes {
         }
     }
 
-    public static void mostrarEstadoFinal(List<Personaje> personajes, String jugador) {
-        System.out.println("\n*** Estado Final de " + jugador + " ***");
-        for (int i = 0; i < personajes.size(); i++) {                                                  //no se usa??
-            System.out.println(personajes.get(i).toStringFormatted(i + 1, jugador));
-        }
-    }
+   // public static void mostrarEstadoFinal(List<Personaje> personajes, String jugador) {
+       // System.out.println("\n*** Estado Final de " + jugador + " ***");
+        //for (int i = 0; i < personajes.size(); i++) {
+           // System.out.println(personajes.get(i).toStringFormatted(i + 1, jugador));
+       // }
+   // }
 
     public static void pausar() {
         try {

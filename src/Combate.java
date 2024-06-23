@@ -44,7 +44,7 @@ public class Combate {
                     System.out.print(muerteDefensor);
 
                     atacante.setSalud(atacante.getSalud() + 10); // Recompensa
-                    String recompensaAtacante = " \uD83D\uDC51 " + atacante.getNombre() + " gana 10 de salud como premio, quedando con " + atacante.getSalud() + " de salud.\n"; // emoji de coronita: \uD83D\uDC51
+                    String recompensaAtacante = " \uD83D\uDC89"+"\uD83D\uDC51 "+ atacante.getNombre() + " gana 10 de salud como premio, quedando con " + atacante.getSalud() + " de salud.\n"; // emoji jeringa \uD83D\uDC89
                     System.out.print("\n");
                     logCombate.append(recompensaAtacante);
                     System.out.print(recompensaAtacante);
@@ -66,7 +66,7 @@ public class Combate {
                     System.out.print(muerteAtacante);
 
                     defensor.setSalud(defensor.getSalud() + 10); // Recompensa
-                    String recompensaDefensor = " \uD83D\uDC51 "+defensor.getNombre() + " gana 10 de salud como premio, quedando con " + defensor.getSalud() + " de salud.\n";
+                    String recompensaDefensor = " \uD83D\uDC89 "+"\uD83D\uDC51 "+ defensor.getNombre() + " gana 10 de salud como premio, quedando con " + defensor.getSalud() + " de salud.\n";
                     System.out.print("\n");
                     logCombate.append(recompensaDefensor);
                     System.out.print(recompensaDefensor);
@@ -80,11 +80,11 @@ public class Combate {
             System.out.print("Se alcanzó el límite de 7 ataques por personaje.\n");
 
             if (atacante.getSalud() > defensor.getSalud()) {
-                logCombate.append(atacante.getNombre()).append(" \uD83D\uDC51 gana el combate con ").append(atacante.getSalud()).append(" de salud restante.\n");
-                System.out.print(atacante.getNombre() + " \uD83D\uDC51 gana el combate con " + atacante.getSalud() + " de salud restante.\n");
+                logCombate.append(" \uD83D\uDC51 "+atacante.getNombre()).append(" gana el combate con ").append(atacante.getSalud()).append(" de salud restante.\n");   // emoji de coronita: \uD83D\uDC51
+                System.out.print(" \uD83D\uDC51 "+atacante.getNombre() + " gana el combate con " + atacante.getSalud() + " de salud restante.\n");
             } else if (defensor.getSalud() > atacante.getSalud()) {
-                logCombate.append(defensor.getNombre()).append(" \uD83D\uDC51 gana el combate con ").append(defensor.getSalud()).append(" de salud restante.\n");
-                System.out.print(defensor.getNombre() + " \uD83D\uDC51 gana el combate con " + defensor.getSalud() + " de salud restante.\n");
+                logCombate.append(" \uD83D\uDC51 "+defensor.getNombre()).append(" gana el combate con ").append(defensor.getSalud()).append(" de salud restante.\n");
+                System.out.print(" \uD83D\uDC51 " +defensor.getNombre() + " gana el combate con " + defensor.getSalud() + " de salud restante.\n");
             } else {
                 logCombate.append("El combate termina en empate con ambos personajes teniendo ").append(atacante.getSalud()).append(" de salud restante.\n");
                 System.out.print("El combate termina en empate con ambos personajes teniendo " + atacante.getSalud() + " de salud restante.\n");
