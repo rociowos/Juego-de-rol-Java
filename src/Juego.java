@@ -159,10 +159,19 @@ public class Juego {
                 defensor = Jugador1.get(indexEquipo1);
             }
 
-            Combate combate = new Combate(atacante, defensor);
-            log.append(combate.realizarAtaques());
+            if (defensor.getSalud() > 0) { // Verifica si el defensor tiene salud mayor a 0
+                Combate combate = new Combate(atacante, defensor);
+                log.append(combate.realizarAtaques());
 
-            if (defensor.getSalud() == 0) {
+                if (defensor.getSalud() == 0) {
+                    if (turnoEquipo1) {
+                        indexEquipo2++;
+                    } else {
+                        indexEquipo1++;
+                    }
+                }
+            } else {
+                // Si el defensor no tiene salud, avanza al siguiente personaje en el equipo contrario
                 if (turnoEquipo1) {
                     indexEquipo2++;
                 } else {
@@ -187,7 +196,6 @@ public class Juego {
         log.append(generarLog());
         EstadoPersonajes.guardarLog(log.toString());
     }
-
     private String generarLog() {
         StringBuilder log = new StringBuilder();
         log.append("*** Estado Final del Juego ***\n");

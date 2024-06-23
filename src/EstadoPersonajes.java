@@ -56,7 +56,7 @@ public class EstadoPersonajes {
         File file = new File(LOG_FILE);
         if (file.exists()) {
             if (file.delete()) {
-                System.out.println("Archivo de logs borrado exitosamente.");
+                System.out.println("\n Archivo de logs borrado exitosamente.");
             } else {
                 System.out.println("Error al borrar el archivo de logs.");
             }
