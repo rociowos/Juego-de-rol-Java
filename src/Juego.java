@@ -201,12 +201,12 @@ public class Juego {
         log.append("*** Estado Final del Juego ***\n");
         System.out.println("\n------------------------------- \n ");
 
-        log.append("                    JUGADOR 1\n     ");
+        log.append("                 JUGADOR 1\n     ");
         for (Personaje personaje : Jugador1) {
             log.append(personaje.toStringFormatted(0, "Jugador 1")).append("\n");
         }
 
-        log.append("                    JUGADOR 2\n     ");
+        log.append("                 JUGADOR 2\n     ");
         for (Personaje personaje : Jugador2) {
             log.append(personaje.toStringFormatted(0, "Jugador 2")).append("\n");
         }
