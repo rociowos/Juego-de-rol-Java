@@ -194,7 +194,7 @@ public class Juego {
         }
 
         log.append(generarLog());
-        EstadoPersonajes.guardarLog(log.toString());
+        ManejoLogs.guardarLog(log.toString());
     }
     private String generarLog() {
         StringBuilder log = new StringBuilder();

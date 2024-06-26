@@ -30,10 +30,10 @@ public class Menu {
                     }
                     break;
                 case 3:
-                    EstadoPersonajes.leerLogs();
+                    ManejoLogs.leerLogs();
                     break;
                 case 4:
-                    EstadoPersonajes.borrarLogs();
+                    ManejoLogs.borrarLogs();
                     break;
                 case 5:
                     System.out.println("¡Gracias por jugar!");
