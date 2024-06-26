@@ -15,6 +15,7 @@ Este es un juego de combate basado en personajes de fantasía, desarrollado en J
 * Menu.java: Maneja la interacción con el usuario y el menú principal.
 * Juego.java: Contiene la lógica principal del juego, incluida la generación de personajes y la secuencia de combate.
 * Combate.java: Gestiona la lógica de los combates entre personajes.
-* EstadoPersonajes.java: Gestiona la creación de personajes y la manipulación del archivo de logs.
+* EstadoPersonajes.java: Gestiona la creación de personajes.
+* ManejoLogs: Manipulación del archivo de logs.
 * Personaje.java: Clase abstracta que define las propiedades y métodos básicos de un personaje.
 * Humano.java, Orco.java, Elfo.java: Clases que heredan de Personaje y definen los detalles específicos de cada raza.
